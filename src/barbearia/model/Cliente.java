@@ -42,7 +42,7 @@ public class Cliente {
     public void setTelefone(String telefone)   { this.telefone = telefone; }
     public void setEmail(String email)         { this.email = email; }
     public void setDataNascimento(LocalDate d) { this.dataNascimento = d; }
-
+    public void setIdCliente(int idCliente) { this.idCliente = idCliente; }
     @Override
     public String toString() {
         return nome + " — " + telefone;
