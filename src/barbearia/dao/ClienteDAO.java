@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteDAO {
-
+    //inserir cliente
     public void inserir(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO cliente (nome, telefone, email, data_nascimento) "
                    + "VALUES (?, ?, ?, ?)";
@@ -21,7 +21,7 @@ public class ClienteDAO {
             ps.executeUpdate();
         }
     }
-
+    //Buscar todos clientes
     public List<Cliente> buscarTodos() throws SQLException {
         String sql = "SELECT * FROM cliente ORDER BY nome";
         List<Cliente> lista = new ArrayList<>();
@@ -42,7 +42,7 @@ public class ClienteDAO {
         }
         return lista;
     }
-
+    //buscar por nome
     public List<Cliente> buscarPorNome(String nome) throws SQLException {
         String sql = "SELECT * FROM cliente WHERE nome LIKE ? ORDER BY nome";
         List<Cliente> lista = new ArrayList<>();
@@ -64,7 +64,7 @@ public class ClienteDAO {
         }
         return lista;
     }
-
+    //editar cliente
     public void atualizar(Cliente cliente) throws SQLException {
         String sql = "UPDATE cliente SET nome=?, telefone=?, email=?, data_nascimento=? "
                    + "WHERE id_cliente=?";
@@ -79,7 +79,7 @@ public class ClienteDAO {
             ps.executeUpdate();
         }
     }
-
+    //deletar cliente
     public void deletar(int idCliente) throws SQLException {
         String sql = "DELETE FROM cliente WHERE id_cliente = ?";
         try (Connection con = ConexaoMySQL.obterConexao();
