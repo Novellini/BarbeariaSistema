@@ -6,3 +6,4 @@ nbproject/private/
 *.war
 *.log
 .DS_Store
+src/barbearia/conexao/ConexaoMySQL.java
