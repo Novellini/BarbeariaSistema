@@ -29,13 +29,14 @@ public class Barbeiro {
     public String   getNome() {return nome;}
     public String   getTelefone() {return telefone;}
     public String   getEspecialidade() {return especialidade;}
-    public boolean   getAtivo()  {return ativo;}
+    public boolean   isAtivo()  {return ativo;}
     
     public void setNome(String nome) {this.nome = nome;}
     public void setTelefone(String telefone) {this.telefone = telefone;}
     public void setEspecialidade(String especialidade) {this.especialidade = especialidade;}
     public void setAtvio(boolean ativo) {this.ativo = ativo;}
-
+    public void setIdBarbeiro(int idBarbeiro) {this.id_barbeiro = idBarbeiro;}
+    
     @Override
     public String toString() {
         return nome + " — " + telefone;

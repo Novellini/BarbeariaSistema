@@ -10,18 +10,82 @@ import java.util.List;
 public class BarbeirDAO {
     
     //inserir barbeiro
-    public void Inserir(Barbeiro barbeiro) throws SQLException{
-        String sql = "inserir into barbeiro (nome,telefone,especialidade,ativo)"
-                + "values (?,?,?,?)";
-        try (Connection con = ConexaoMySQL.obterConexao();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, barbeiro.getNome());
-            ps.setString(2, barbeiro.getTelefone());
-            ps.setString(3, barbeiro.getEspecialidade());
-            ps.setDate(4, barbeiro.getAtivo() != null
-                    ? Date.valueOf(barbeiro.getDataNascimento()) : null);
-            ps.executeUpdate();
+    public void inserir(Barbeiro barbeiro) throws SQLException {
+    String sql = "INSERT INTO barbeiro (nome, telefone, especialidade, ativo) "
+               + "VALUES (?, ?, ?, ?)";
+    try (Connection con = ConexaoMySQL.obterConexao();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, barbeiro.getNome());
+        ps.setString(2, barbeiro.getTelefone());
+        ps.setString(3, barbeiro.getEspecialidade());
+        ps.setBoolean(4, barbeiro.isAtivo());
+        ps.executeUpdate();
+    }
+}
+    
+    // buscar todos os barbeiros
+public List<Barbeiro> buscarTodos() throws SQLException {
+    String sql = "SELECT * FROM barbeiro ORDER BY nome";
+    List<Barbeiro> lista = new ArrayList<>();
+    try (Connection con = ConexaoMySQL.obterConexao();
+         PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+            lista.add(new Barbeiro(
+                rs.getInt("id_barbeiro"),
+                rs.getString("nome"),
+                rs.getString("telefone"),
+                rs.getString("especialidade"),
+                rs.getBoolean("ativo")
+            ));
         }
+    }
+    return lista;
+}
+
+// buscar barbeiro por nome
+public List<Barbeiro> buscarPorNome(String nome) throws SQLException {
+    String sql = "SELECT * FROM barbeiro WHERE nome LIKE ? ORDER BY nome";
+    List<Barbeiro> lista = new ArrayList<>();
+    try (Connection con = ConexaoMySQL.obterConexao();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, "%" + nome + "%");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            lista.add(new Barbeiro(
+                rs.getInt("id_barbeiro"),
+                rs.getString("nome"),
+                rs.getString("telefone"),
+                rs.getString("especialidade"),
+                rs.getBoolean("ativo")
+            ));
+        }
+    }
+    return lista;
+}
+
+// atualizar barbeiro
+public void atualizar(Barbeiro barbeiro) throws SQLException {
+    String sql = "UPDATE barbeiro SET nome=?, telefone=?, especialidade=?, ativo=? "
+               + "WHERE id_barbeiro=?";
+    try (Connection con = ConexaoMySQL.obterConexao();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, barbeiro.getNome());
+        ps.setString(2, barbeiro.getTelefone());
+        ps.setString(3, barbeiro.getEspecialidade());
+        ps.setBoolean(4, barbeiro.isAtivo());
+        ps.setInt(5, barbeiro.getId_barbeiro());
+        ps.executeUpdate();
+    }
+}
+
+// deletar barbeiro
+public void deletar(int idBarbeiro) throws SQLException {
+    String sql = "DELETE FROM barbeiro WHERE id_barbeiro = ?";
+    try (Connection con = ConexaoMySQL.obterConexao();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, idBarbeiro);
+        ps.executeUpdate();
     }
     }
 }

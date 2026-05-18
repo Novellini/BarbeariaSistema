@@ -1,8 +1,8 @@
-import barbearia.view.TelaCliente;
+import barbearia.view.TelaInicial;
 import javax.swing.SwingUtilities;
 
 public class Main {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new TelaCliente().setVisible(true));
+        SwingUtilities.invokeLater(() -> new TelaInicial().setVisible(true));
     }
 }
