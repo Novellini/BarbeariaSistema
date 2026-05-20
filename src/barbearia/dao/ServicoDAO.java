@@ -1,13 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package barbearia.dao;
 
-/**
- *
- * @author gustavo
- */
+import barbearia.conexao.ConexaoMySQL;
+import barbearia.model.Cliente;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ServicoDAO {
-    
+    //inserir serviço novo
+    public void inserir(Servico servico) throws SQLException {
+        
+    }
 }
