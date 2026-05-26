@@ -63,7 +63,7 @@ public class TelaInicial extends JFrame {
         // Eventos
         btnClientes.addActionListener(e  -> new TelaCliente().setVisible(true));
         btnBarbeiros.addActionListener(e -> new TelaBarbeiro().setVisible(true));
-        btnServicos.addActionListener(e  -> JOptionPane.showMessageDialog(this, "Em breve!"));
+        btnServicos.addActionListener(e -> new TelaServico().setVisible(true));
         btnAgendar.addActionListener(e   -> JOptionPane.showMessageDialog(this, "Em breve!"));
         btnAgendaDia.addActionListener(e -> JOptionPane.showMessageDialog(this, "Em breve!"));
         btnSair.addActionListener(e      -> System.exit(0));
