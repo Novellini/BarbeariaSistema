@@ -1,341 +1,402 @@
+
 package barbearia.view;
 
-import barbearia.dao.ServicoDAO;
-import barbearia.model.Servico;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.util.List;
 
-public class TelaServico extends JFrame {
+public class TelaServico extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaServico.class.getName());
 
-    // ---- Campos do formulário ----
-    private JTextField txtNome;        // campo nome do serviço
-    private JTextField txtDescricao;   // campo descrição
-    private JTextField txtPreco;       // campo preço (só números)
-    private JTextField txtDuracao;     // campo duração em minutos (só números)
-    private JTextField txtBusca;       // campo de busca por nome
-    private JCheckBox  chkAtivo;       // checkbox para marcar se está ativo
-
-    // ---- Botões ----
-    private JButton btnSalvar;
-    private JButton btnEditar;
-    private JButton btnDeletar;
-    private JButton btnLimpar;
-    private JButton btnBuscar;
-
-    // ---- Tabela ----
-    private JTable tabelaServicos;
-    private DefaultTableModel modeloTabela; // modelo que armazena os dados da tabela
-
-    // ---- Outros ----
-    private ServicoDAO dao = new ServicoDAO(); // objeto para acessar o banco
-    private int idSelecionado = -1;            // guarda o id do serviço clicado na tabela
-
-    // ---- Construtor ----
+    
     public TelaServico() {
-        initComponentes(); // monta a tela
-        carregarTabela();  // carrega os serviços do banco na tabela
+        initComponents();
+        configurarTabela();
+        carregarTabela();
     }
 
-    // ---- Monta todos os componentes visuais da tela ----
-    private void initComponentes() {
-        setTitle("Cadastro de Serviços");
-        setSize(750, 550);
-        setLocationRelativeTo(null); // centraliza na tela
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(new BorderLayout(10, 10));
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-        // ---- PAINEL DO FORMULÁRIO ----
-        // GridLayout(6,2) = 6 linhas e 2 colunas
-        JPanel painelForm = new JPanel(new GridLayout(6, 2, 8, 8));
-        painelForm.setBorder(BorderFactory.createTitledBorder("Dados do Serviço"));
+        jPanel1 = new javax.swing.JPanel();
+        lblNome = new javax.swing.JLabel();
+        lblPreco = new javax.swing.JLabel();
+        lblDuracao = new javax.swing.JLabel();
+        lblDescricao = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        txtPreco = new javax.swing.JTextField();
+        txtDuracao = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
+        chkAtivo = new javax.swing.JCheckBox();
+        btnEditar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        lblBuscaNome = new javax.swing.JLabel();
+        txtBuscaNome = new javax.swing.JTextField();
+        btnBuscaNome = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaServico = new javax.swing.JTable();
 
-        // Criação dos campos
-        txtNome      = new JTextField();
-        txtDescricao = new JTextField();
-        txtPreco     = new JTextField();
-        txtDuracao   = new JTextField();
-        chkAtivo     = new JCheckBox("Ativo");
-        chkAtivo.setSelected(true); // novo serviço começa ativo por padrão
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        // ---- BLOQUEIO DE LETRAS NO CAMPO PREÇO ----
-        // Permite apenas: números, vírgula, ponto e backspace
-        txtPreco.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if (!Character.isDigit(c) && c != ',' && c != '.' && c != '\b') {
-                    e.consume(); // cancela o caractere inválido
-                }
+        lblNome.setText("Nome:*");
+
+        lblPreco.setText("Preço (R$):*");
+
+        lblDuracao.setText("Duração (min):*");
+
+        lblDescricao.setText("Descrição:");
+
+        chkAtivo.setText("Ativo");
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(this::btnEditarActionPerformed);
+
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(this::btnDeletarActionPerformed);
+
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(this::btnLimparActionPerformed);
+
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(this::btnSalvarActionPerformed);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNome)
+                                    .addComponent(lblPreco)
+                                    .addComponent(lblDuracao)
+                                    .addComponent(lblDescricao))
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                    .addComponent(txtDuracao)
+                                    .addComponent(txtPreco)
+                                    .addComponent(txtNome)))
+                            .addComponent(chkAtivo)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDeletar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLimpar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNome)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPreco)
+                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDuracao)
+                    .addComponent(txtDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescricao)
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkAtivo)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditar)
+                    .addComponent(btnDeletar)
+                    .addComponent(btnLimpar)
+                    .addComponent(btnSalvar)))
+        );
+
+        lblBuscaNome.setText("Buscar por nome:");
+
+        txtBuscaNome.addActionListener(this::txtBuscaNomeActionPerformed);
+
+        btnBuscaNome.setText("Buscar");
+        btnBuscaNome.addActionListener(this::btnBuscaNomeActionPerformed);
+
+        tabelaServico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
+        ));
+        jScrollPane1.setViewportView(tabelaServico);
 
-        // ---- BLOQUEIO DE LETRAS NO CAMPO DURAÇÃO ----
-        // Permite apenas: números e backspace
-        txtDuracao.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if (!Character.isDigit(c) && c != '\b') {
-                    e.consume(); // cancela o caractere inválido
-                }
-            }
-        });
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblBuscaNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtBuscaNome)
+                .addGap(18, 18, 18)
+                .addComponent(btnBuscaNome)
+                .addGap(48, 48, 48))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBuscaNome)
+                    .addComponent(txtBuscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscaNome))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
 
-        // Adiciona labels e campos no painel
-        painelForm.add(new JLabel("Nome:*"));
-        painelForm.add(txtNome);
-        painelForm.add(new JLabel("Descrição:"));
-        painelForm.add(txtDescricao);
-        painelForm.add(new JLabel("Preço (R$):*"));
-        painelForm.add(txtPreco);
-        painelForm.add(new JLabel("Duração (min):*"));
-        painelForm.add(txtDuracao);
-        painelForm.add(new JLabel("Status:"));
-        painelForm.add(chkAtivo);
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
-        // ---- PAINEL DOS BOTÕES ----
-        JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        btnSalvar  = new JButton("Salvar");
-        btnEditar  = new JButton("Editar");
-        btnDeletar = new JButton("Deletar");
-        btnLimpar  = new JButton("Limpar");
+    private void txtBuscaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaNomeActionPerformed
+        
+    }//GEN-LAST:event_txtBuscaNomeActionPerformed
 
-        // Cores dos botões
-        btnSalvar.setBackground(new Color(34, 139, 34));
-        btnSalvar.setForeground(Color.WHITE);
-        btnDeletar.setBackground(new Color(178, 34, 34));
-        btnDeletar.setForeground(Color.WHITE);
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        salvar();
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
-        painelBotoes.add(btnSalvar);
-        painelBotoes.add(btnEditar);
-        painelBotoes.add(btnDeletar);
-        painelBotoes.add(btnLimpar);
-        painelForm.add(new JLabel(""));
-        painelForm.add(painelBotoes);
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        editar();
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-        // ---- PAINEL DE BUSCA ----
-        JPanel painelBusca = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        txtBusca  = new JTextField(20);
-        btnBuscar = new JButton("Buscar");
-        painelBusca.add(new JLabel("Buscar por nome:"));
-        painelBusca.add(txtBusca);
-        painelBusca.add(btnBuscar);
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        deletar();
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
-        // ---- TABELA ----
-        // Colunas da tabela
-        String[] colunas = {"ID", "Nome", "Descrição", "Preço", "Duração", "Ativo"};
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limpar();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
-        // DefaultTableModel controla os dados da tabela
-        // isCellEditable retorna false para impedir edição direta na tabela
-        modeloTabela = new DefaultTableModel(colunas, 0) {
-            public boolean isCellEditable(int row, int col) { return false; }
-        };
+    private void btnBuscaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaNomeActionPerformed
+        buscar();
+    }//GEN-LAST:event_btnBuscaNomeActionPerformed
 
-        tabelaServicos = new JTable(modeloTabela);
-        tabelaServicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabelaServicos.getColumnModel().getColumn(0).setMaxWidth(40); // coluna ID pequena
-
-        // ---- MONTAGEM FINAL DA TELA ----
-        JPanel painelSul = new JPanel(new BorderLayout());
-        painelSul.add(painelBusca, BorderLayout.NORTH);
-        painelSul.add(new JScrollPane(tabelaServicos), BorderLayout.CENTER);
-
-        add(painelForm, BorderLayout.NORTH);
-        add(painelSul,  BorderLayout.CENTER);
-
-        // ---- EVENTOS DOS BOTÕES ----
-        // Cada botão chama seu método correspondente
-        btnSalvar.addActionListener(e  -> salvar());
-        btnEditar.addActionListener(e  -> editar());
-        btnDeletar.addActionListener(e -> deletar());
-        btnLimpar.addActionListener(e  -> limpar());
-        btnBuscar.addActionListener(e  -> buscar());
-
-        // Quando o usuário clica em uma linha da tabela
-        // preenche o formulário com os dados daquela linha
-        tabelaServicos.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) selecionarDaTabela();
-        });
+    
+    public static void main(String args[]) {
+        
+        java.awt.EventQueue.invokeLater(() -> new TelaServico().setVisible(true));
     }
+    private barbearia.dao.ServicoDAO dao = new barbearia.dao.ServicoDAO();
+private javax.swing.table.DefaultTableModel modeloTabela;
+private int idSelecionado = -1;
 
-    // ---- Busca todos os serviços do banco e exibe na tabela ----
-    private void carregarTabela() {
-        modeloTabela.setRowCount(0); // limpa a tabela antes de carregar
-        try {
-            List<Servico> lista = dao.buscarTodos();
-            for (Servico s : lista) {
-                // Adiciona uma linha na tabela para cada serviço
-                modeloTabela.addRow(new Object[]{
-                    s.getIdServico(),
-                    s.getNome(),
-                    s.getDescricao(),
-                    "R$ " + s.getPreco(),
-                    s.getDuracaoMin() + " min",
-                    s.isAtivo() ? "Sim" : "Não"
-                });
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar: " + ex.getMessage());
+private void configurarTabela() {
+    String[] colunas = {"ID", "Nome", "Descrição", "Preço", "Duração", "Ativo"};
+    modeloTabela = new javax.swing.table.DefaultTableModel(colunas, 0) {
+        public boolean isCellEditable(int row, int col) { return false; }
+    };
+    tabelaServico.setModel(modeloTabela);
+    tabelaServico.getColumnModel().getColumn(0).setMaxWidth(40);
+    tabelaServico.getSelectionModel().addListSelectionListener(e -> {
+        if (!e.getValueIsAdjusting()) selecionarDaTabela();
+    });
+}
+
+private void carregarTabela() {
+    modeloTabela.setRowCount(0);
+    try {
+        java.util.List<barbearia.model.Servico> lista = dao.buscarTodos();
+        for (barbearia.model.Servico s : lista) {
+            modeloTabela.addRow(new Object[]{
+                s.getIdServico(), s.getNome(), s.getDescricao(),
+                "R$ " + s.getPreco(), s.getDuracaoMin() + " min",
+                s.isAtivo() ? "Sim" : "Não"
+            });
         }
+    } catch (java.sql.SQLException ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar: " + ex.getMessage());
     }
+}
 
-    // ---- Salva um novo serviço no banco ----
-    private void salvar() {
-        if (!validar()) return; // para se campos obrigatórios estiverem vazios
+private void salvar() {
+    System.out.println("Nome: " + txtNome.getText());
+    System.out.println("Preco: " + txtPreco.getText());
+    System.out.println("Duracao: " + txtDuracao.getText());
+    if (!validar()) return;
+    try {
+        dao.inserir(new barbearia.model.Servico(
+            txtNome.getText().trim(),
+            txtDescricao.getText().trim().isEmpty() ? null : txtDescricao.getText().trim(),
+            new java.math.BigDecimal(txtPreco.getText().trim().replace(",", ".")),
+            Integer.parseInt(txtDuracao.getText().trim()),
+            chkAtivo.isSelected()
+        ));
+        javax.swing.JOptionPane.showMessageDialog(this, "Serviço salvo!");
+        limpar();
+        carregarTabela();
+    } catch (java.sql.SQLException ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage());
+    }
+}
+
+private void editar() {
+    if (idSelecionado == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Selecione um serviço primeiro!");
+        return;
+    }
+    if (!validar()) return;
+    try {
+        barbearia.model.Servico s = new barbearia.model.Servico(
+            txtNome.getText().trim(),
+            txtDescricao.getText().trim().isEmpty() ? null : txtDescricao.getText().trim(),
+            new java.math.BigDecimal(txtPreco.getText().trim().replace(",", ".")),
+            Integer.parseInt(txtDuracao.getText().trim()),
+            chkAtivo.isSelected()
+        );
+        s.setIdServico(idSelecionado);
+        dao.atualizar(s);
+        javax.swing.JOptionPane.showMessageDialog(this, "Serviço atualizado!");
+        limpar();
+        carregarTabela();
+    } catch (java.sql.SQLException ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
+    }
+}
+
+private void deletar() {
+    if (idSelecionado == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Selecione um serviço primeiro!");
+        return;
+    }
+    int ok = javax.swing.JOptionPane.showConfirmDialog(this,
+        "Deletar este serviço?", "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
+    if (ok == javax.swing.JOptionPane.YES_OPTION) {
         try {
-            dao.inserir(new Servico(
-                txtNome.getText().trim(),
-                txtDescricao.getText().trim().isEmpty() ? null : txtDescricao.getText().trim(),
-                new BigDecimal(txtPreco.getText().trim().replace(",", ".")), // vírgula vira ponto
-                Integer.parseInt(txtDuracao.getText().trim()),
-                chkAtivo.isSelected()
-            ));
-            JOptionPane.showMessageDialog(this, "Serviço salvo!");
+            dao.deletar(idSelecionado);
+            javax.swing.JOptionPane.showMessageDialog(this, "Serviço deletado!");
             limpar();
             carregarTabela();
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Preço ou duração inválidos!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage());
-        }
-    }
-
-    // ---- Atualiza o serviço selecionado na tabela ----
-    private void editar() {
-        // Verifica se algum serviço foi selecionado
-        if (idSelecionado == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um serviço primeiro!");
-            return;
-        }
-        if (!validar()) return;
-        try {
-            Servico s = new Servico(
-                txtNome.getText().trim(),
-                txtDescricao.getText().trim().isEmpty() ? null : txtDescricao.getText().trim(),
-                new BigDecimal(txtPreco.getText().trim().replace(",", ".")),
-                Integer.parseInt(txtDuracao.getText().trim()),
-                chkAtivo.isSelected()
-            );
-            s.setIdServico(idSelecionado); // seta o id para o UPDATE saber qual linha atualizar
-            dao.atualizar(s);
-            JOptionPane.showMessageDialog(this, "Serviço atualizado!");
-            limpar();
-            carregarTabela();
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Preço ou duração inválidos!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
-        }
-    }
-
-    // ---- Remove o serviço selecionado do banco ----
-    private void deletar() {
-        if (idSelecionado == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um serviço primeiro!");
-            return;
-        }
-        // Pede confirmação antes de deletar
-        int ok = JOptionPane.showConfirmDialog(this,
-            "Deletar este serviço?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (ok == JOptionPane.YES_OPTION) {
-            try {
-                dao.deletar(idSelecionado);
-                JOptionPane.showMessageDialog(this, "Serviço deletado!");
-                limpar();
-                carregarTabela();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Erro ao deletar: " + ex.getMessage());
+        } catch (java.sql.SQLException ex) {
+            if (ex.getMessage().contains("foreign key constraint")) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "Não é possível deletar pois está vinculado a um agendamento!");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao deletar: " + ex.getMessage());
             }
         }
     }
-
-    // ---- Busca serviços pelo nome digitado ----
-    private void buscar() {
-        try {
-            modeloTabela.setRowCount(0);
-            // Se o campo busca estiver vazio, busca todos
-            // Se tiver algo digitado, busca pelo nome
-            List<Servico> lista = txtBusca.getText().trim().isEmpty()
-                ? dao.buscarTodos()
-                : dao.buscarPorNome(txtBusca.getText().trim());
-            for (Servico s : lista) {
-                modeloTabela.addRow(new Object[]{
-                    s.getIdServico(), s.getNome(), s.getDescricao(),
-                    "R$ " + s.getPreco(), s.getDuracaoMin() + " min",
-                    s.isAtivo() ? "Sim" : "Não"
-                });
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro na busca: " + ex.getMessage());
+}
+        
+private void buscar() {
+    try {
+        modeloTabela.setRowCount(0);
+        java.util.List<barbearia.model.Servico> lista = txtBuscaNome.getText().trim().isEmpty()
+            ? dao.buscarTodos()
+            : dao.buscarPorNome(txtBuscaNome.getText().trim());
+        for (barbearia.model.Servico s : lista) {
+            modeloTabela.addRow(new Object[]{
+                s.getIdServico(), s.getNome(), s.getDescricao(),
+                "R$ " + s.getPreco(), s.getDuracaoMin() + " min",
+                s.isAtivo() ? "Sim" : "Não"
+            });
         }
+    } catch (java.sql.SQLException ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Erro na busca: " + ex.getMessage());
     }
+}
 
-    // ---- Preenche o formulário ao clicar em uma linha da tabela ----
-    private void selecionarDaTabela() {
-        int linha = tabelaServicos.getSelectedRow();
-        if (linha == -1) return;
+private void selecionarDaTabela() {
+    int linha = tabelaServico.getSelectedRow();
+    if (linha == -1) return;
+    idSelecionado = (int) modeloTabela.getValueAt(linha, 0);
+    txtNome.setText((String) modeloTabela.getValueAt(linha, 1));
+    txtDescricao.setText(modeloTabela.getValueAt(linha, 2) != null
+        ? (String) modeloTabela.getValueAt(linha, 2) : "");
+    txtPreco.setText(modeloTabela.getValueAt(linha, 3).toString().replace("R$ ", ""));
+    txtDuracao.setText(modeloTabela.getValueAt(linha, 4).toString().replace(" min", ""));
+    chkAtivo.setSelected(modeloTabela.getValueAt(linha, 5).equals("Sim"));
+}
 
-        // Guarda o id da linha selecionada para usar no editar/deletar
-        idSelecionado = (int) modeloTabela.getValueAt(linha, 0);
-        txtNome.setText((String) modeloTabela.getValueAt(linha, 1));
-        txtDescricao.setText(modeloTabela.getValueAt(linha, 2) != null
-            ? (String) modeloTabela.getValueAt(linha, 2) : "");
-        // Remove "R$ " antes de colocar no campo preço
-        txtPreco.setText(modeloTabela.getValueAt(linha, 3).toString().replace("R$ ", ""));
-        // Remove " min" antes de colocar no campo duração
-        txtDuracao.setText(modeloTabela.getValueAt(linha, 4).toString().replace(" min", ""));
-        chkAtivo.setSelected(modeloTabela.getValueAt(linha, 5).equals("Sim"));
+private void limpar() {
+    txtNome.setText("");
+    txtDescricao.setText("");
+    txtPreco.setText("");
+    txtDuracao.setText("");
+    txtBuscaNome.setText("");
+    chkAtivo.setSelected(true);
+    idSelecionado = -1;
+    tabelaServico.clearSelection();
+}
+
+private boolean validar() {
+    if (txtNome.getText().trim().isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Nome é obrigatório!");
+        return false;
     }
-
-    // ---- Limpa todos os campos do formulário ----
-    private void limpar() {
-        txtNome.setText("");
-        txtDescricao.setText("");
-        txtPreco.setText("");
-        txtDuracao.setText("");
-        txtBusca.setText("");
-        chkAtivo.setSelected(true);
-        idSelecionado = -1;            // reseta o id selecionado
-        tabelaServicos.clearSelection(); // deseleciona a linha da tabela
+    if (txtPreco.getText().trim().isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Preço é obrigatório!");
+        return false;
     }
-
-    // ---- Valida os campos obrigatórios antes de salvar ou editar ----
-    private boolean validar() {
-        if (txtNome.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nome é obrigatório!");
-            return false;
-        }
-        if (txtPreco.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Preço é obrigatório!");
-            return false;
-        }
-        if (txtDuracao.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Duração é obrigatória!");
-            return false;
-        }
-        // Valida se o preço é um número válido
-        try {
-            new BigDecimal(txtPreco.getText().trim().replace(",", "."));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Preço inválido! Use vírgula ou ponto. Ex: 35,00");
-            return false;
-        }
-        // Valida se a duração é um número inteiro válido
-        try {
-            Integer.parseInt(txtDuracao.getText().trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Duração inválida! Digite só números. Ex: 30");
-            return false;
-        }
-        return true;
+    if (txtDuracao.getText().trim().isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Duração é obrigatória!");
+        return false;
     }
-
-    // ---- Método main para testar a tela isoladamente ----
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new TelaServico().setVisible(true));
+    try {
+        new java.math.BigDecimal(txtPreco.getText().trim().replace(",", "."));
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Preço inválido! Ex: 35,00");
+        return false;
     }
+    try {
+        Integer.parseInt(txtDuracao.getText().trim());
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Duração inválida! Ex: 30");
+        return false;
+    }
+    return true;
+}
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscaNome;
+    private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JCheckBox chkAtivo;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBuscaNome;
+    private javax.swing.JLabel lblDescricao;
+    private javax.swing.JLabel lblDuracao;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPreco;
+    private javax.swing.JTable tabelaServico;
+    private javax.swing.JTextField txtBuscaNome;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtDuracao;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtPreco;
+    // End of variables declaration//GEN-END:variables
 }

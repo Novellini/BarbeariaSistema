@@ -9,7 +9,7 @@ public class Barbeiro {
     private String especialidade;
     private boolean ativo;
     
-    //Construtor para inserir novo Barbeiro
+    //Construtor para inserir novo barbeiro
     public Barbeiro (String nome, String telefone, String especialidade, boolean ativo){
             this.nome =     nome;
             this.telefone = telefone;

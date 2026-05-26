@@ -10,7 +10,7 @@ public class Servico {
     private int        duracaoMin;
     private boolean    ativo;
 
-    // Construtor para Inserir 
+    // Construtor para inserir novo serviço
     public Servico(String nome, String descricao, BigDecimal preco, int duracaoMin, boolean ativo) {
         this.nome       = nome;
         this.descricao  = descricao;
@@ -19,7 +19,7 @@ public class Servico {
         this.ativo      = ativo;
     }
 
-    // Construtor para Buscar
+    // Construtor para buscar o serviço
     public Servico(int idServico, String nome, String descricao, BigDecimal preco, int duracaoMin, boolean ativo) {
         this.idServico  = idServico;
         this.nome       = nome;

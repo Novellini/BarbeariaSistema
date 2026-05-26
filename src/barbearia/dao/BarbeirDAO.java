@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BarbeirDAO {
     
-    //inserir barbeiro
+    //Inserir barbeiro
     public void inserir(Barbeiro barbeiro) throws SQLException {
     String sql = "INSERT INTO barbeiro (nome, telefone, especialidade, ativo) "
                + "VALUES (?, ?, ?, ?)";
@@ -23,7 +23,7 @@ public class BarbeirDAO {
     }
 }
     
-    // buscar todos os barbeiros
+    //Buscar todos os barbeiros
 public List<Barbeiro> buscarTodos() throws SQLException {
     String sql = "SELECT * FROM barbeiro ORDER BY nome";
     List<Barbeiro> lista = new ArrayList<>();
@@ -43,7 +43,7 @@ public List<Barbeiro> buscarTodos() throws SQLException {
     return lista;
 }
 
-// buscar barbeiro por nome
+//Buscar barbeiro por nome
 public List<Barbeiro> buscarPorNome(String nome) throws SQLException {
     String sql = "SELECT * FROM barbeiro WHERE nome LIKE ? ORDER BY nome";
     List<Barbeiro> lista = new ArrayList<>();
@@ -64,7 +64,7 @@ public List<Barbeiro> buscarPorNome(String nome) throws SQLException {
     return lista;
 }
 
-// atualizar barbeiro
+//Editar barbeiro
 public void atualizar(Barbeiro barbeiro) throws SQLException {
     String sql = "UPDATE barbeiro SET nome=?, telefone=?, especialidade=?, ativo=? "
                + "WHERE id_barbeiro=?";
@@ -79,7 +79,7 @@ public void atualizar(Barbeiro barbeiro) throws SQLException {
     }
 }
 
-// deletar barbeiro
+//Deletar barbeiro
 public void deletar(int idBarbeiro) throws SQLException {
     String sql = "DELETE FROM barbeiro WHERE id_barbeiro = ?";
     try (Connection con = ConexaoMySQL.obterConexao();

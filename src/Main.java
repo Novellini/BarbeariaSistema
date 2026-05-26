@@ -1,8 +1,8 @@
-import barbearia.view.TelaInicial;
+import barbearia.view.TelaPrincipal;
 import javax.swing.SwingUtilities;
 
 public class Main {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new TelaInicial().setVisible(true));
+        SwingUtilities.invokeLater(() -> new TelaPrincipal().setVisible(true));
     }
 }

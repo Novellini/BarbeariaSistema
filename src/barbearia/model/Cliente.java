@@ -12,7 +12,7 @@ public class Cliente {
     private LocalDate     dataNascimento;
     private LocalDateTime criadoEm;
 
-    // Construtor para INSERIR novo cliente (sem id)
+    //Construtor para inserir novo cliente
     public Cliente(String nome, String telefone, String email, LocalDate dataNascimento) {
         this.nome           = nome;
         this.telefone       = telefone;
@@ -20,7 +20,7 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
     }
 
-    // Construtor para quando BUSCAR do banco (com id)
+    //Construtor para buscar algum cliente
     public Cliente(int idCliente, String nome, String telefone, String email,
                    LocalDate dataNascimento, LocalDateTime criadoEm) {
         this.idCliente      = idCliente;

@@ -43,7 +43,7 @@ public List<Servico> buscarTodos() throws SQLException {
     }
     return lista;  
 }
-    // buscar serviço por nome
+    //Buscar serviço por nome
 public List<Servico> buscarPorNome(String nome) throws SQLException {
     String sql = "SELECT * FROM servico WHERE nome LIKE ? ORDER BY nome";
     List<Servico> lista = new ArrayList<>();
@@ -65,7 +65,7 @@ public List<Servico> buscarPorNome(String nome) throws SQLException {
     return lista;
 }
 
-// atualizar serviço
+// Editar serviço
 public void atualizar(Servico servico) throws SQLException {
     String sql = "UPDATE servico SET nome=?, descricao=?, preco=?, duracao_min=?, ativo=? "
                + "WHERE id_servico=?";
@@ -81,7 +81,7 @@ public void atualizar(Servico servico) throws SQLException {
     }
 }
 
-// deletar serviço
+//Deletar serviço
 public void deletar(int idServico) throws SQLException {
     String sql = "DELETE FROM servico WHERE id_servico = ?";
     try (Connection con = ConexaoMySQL.obterConexao();
