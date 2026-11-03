@@ -26,9 +26,11 @@ Sistema desktop para gerenciamento e agendamento de uma barbearia, desenvolvido 
 
 ## Como executar
 1. Instale o Java 17 e o MySQL.
-2. Execute o script da pasta `database` para criar o banco.
+2. Crie o banco (o script cria o banco `barbearia` e as tabelas, sem dados iniciais): `mysql -u root -p < database/barbearia.sql`
+   > **Atenção:** o script recria as tabelas. Se rodar de novo, todos os dados cadastrados serão apagados. Use só na primeira instalação.
 3. Configure usuário e senha do MySQL.
 4. Abra o projeto no NetBeans e execute.
+-Como o banco começa vazio, o primeiro passo depois de entrar no sistema é cadastrar clientes, barbeiros e serviços.
 
 ## Limitações conhecidas desta versão
 - **Uso local:** o sistema funciona como aplicação desktop com banco MySQL local, então só roda no computador onde o banco está instalado. Não há acesso por outros dispositivos.
